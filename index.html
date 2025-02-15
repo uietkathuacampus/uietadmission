@@ -114,63 +114,73 @@
         </form>
     </div>
     <script>
-        window.addEventListener('load', function() {
-      let forms = document.getElementsById('studentForm');
-      for (let form of forms) {
-        form.addEventListener('formdata', function(event) {
-          let formData = event.formData;
-          for (let [name, value] of Array.from(formData.entries())) {
-            if (value === '') formData.delete(name);
-          }
-        });
-      }
-    });  
-        function submitForm() {
+    function submitForm() {
         const form = document.getElementById('studentForm');
         const formData = new FormData(form);
 
-        const filePromises = [];
+        const requiredFields = ['Full Name', 'Father Name', 'Mother Name', 'Email Address', 'PhoneNumber', 'Address', 'Course Applied', 'Selected Branch', '10th Board Name', '10th Marks', '12th Board Name', '12th Marks', 'JEE Main Score', 'CUET Score', 'Category']; // Add required text fields here
         const fileFields = ['PaymentReceipt', 'StudentPhoto'];
+
+        // Check for empty required text inputs
+        for (const field of requiredFields) {
+            const input = document.querySelector(`input[name="${field}"]`);
+            if (!input || !input.value.trim()) {
+                alert(`Please fill out the ${field} field.`);
+                return; // Stop submission if a required field is empty
+            }
+        }
+
+        // Check for missing required file uploads
+        for (const field of fileFields) {
+            const fileInput = document.querySelector(`input[name="${field}"]`);
+            if (!fileInput.files.length) {
+                alert(`Please upload a file for ${field}.`);
+                return; // Stop submission if a required file is missing
+            }
+        }
+
+        const filePromises = [];
 
         fileFields.forEach(field => {
             const fileInput = document.querySelector(`input[name="${field}"]`);
             if (fileInput.files.length > 0) {
                 const file = fileInput.files[0];
                 const reader = new FileReader();
-            
+
                 const filePromise = new Promise(resolve => {
                     reader.onloadend = function () {
                         formData.append(field, reader.result.split(',')[1]);  // Base64 data
                         formData.append(`${field}MimeType`, file.type); // File type
                         formData.append(`${field}Name`, file.name); // File name
                         resolve();
-                        };
-                        reader.readAsDataURL(file);
-            });
+                    };
+                    reader.readAsDataURL(file);
+                });
 
-            filePromises.push(filePromise);
-        }
-    });
-
-    Promise.all(filePromises).then(() => {
-        fetch('https://script.google.com/macros/s/AKfycbzyNed934n6H1063B0X48q3jLxNpMa_hV6zrvOyM0ByNQcTFQqyEmPZCzJFZ6h9X8Hdsg/exec', {
-            method: 'POST',
-            body: formData
-        })
-        .then(response => response.json())
-        .then(data => {
-            if (data.result === 'success') {
-                alert('Form submitted successfully!');
-                form.reset();
-            } else {
-                alert('Error: ' + data.error);
+                filePromises.push(filePromise);
             }
-        })
-        .catch(error => console.error('Error:', error));
-    });
-}
+        });
 
-    </script>
+        Promise.all(filePromises).then(() => {
+            fetch('https://script.google.com/macros/s/AKfycbzyNed934n6H1063B0X48q3jLxNpMa_hV6zrvOyM0ByNQcTFQqyEmPZCzJFZ6h9X8Hdsg/exec', {
+                method: 'POST',
+                body: formData
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.result === 'success') {
+                    alert('Form submitted successfully!');
+                    form.reset();
+                } else {
+                    alert('Error: ' + data.error);
+                }
+            })
+            .catch(error => console.error('Error:', error));
+        });
+    }
+</script>
+
+
     <footer class="footer">
         &copy; 2025 UIET Kathua
     </footer>
