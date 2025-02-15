@@ -1,0 +1,120 @@
+body {
+    font-family: 'Poppins', sans-serif;
+    margin: 0;
+    padding: 0;
+    background: linear-gradient(to right, #fcb09a, #f8d7b7);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+h1 {
+    text-align: center;
+    font-size: 30px;
+    font-weight: bold;
+    color: #333;
+    margin-top: 20px;
+}
+
+.form-container {
+    max-width: 650px;
+    width: 90%;
+    background: white;
+    padding: 25px;
+    border-radius: 12px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    margin-bottom: 30px;
+}
+
+.form-header {
+    text-align: center;
+    margin-bottom: 15px;
+}
+
+h3 {
+    font-size: 22px;
+    font-weight: bold;
+    border-bottom: 2px solid #007bff;
+    display: inline-block;
+    padding-bottom: 5px;
+    color: #333;
+}
+
+.form-group {
+    margin-bottom: 15px;
+}
+
+.form-group label {
+    display: block;
+    font-size: 16px;
+    font-weight: bold;
+    margin-bottom: 5px;
+    color: #555;
+}
+
+.form-group input,
+.form-group select {
+    width: 100%;
+    padding: 12px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    transition: 0.3s ease;
+}
+
+.form-group input:focus,
+.form-group select:focus {
+    border-color: #007bff;
+    outline: none;
+    box-shadow: 0 0 8px rgba(0, 123, 255, 0.2);
+}
+
+.submit-button {
+    text-align: center;
+    margin-top: 20px;
+}
+
+.submit-button button {
+    background: #007bff;
+    color: white;
+    font-size: 18px;
+    padding: 12px 20px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: 0.3s ease;
+}
+
+.submit-button button:hover {
+    background: #0056b3;
+    transform: scale(1.05);
+}
+
+.photo-upload {
+    text-align: center;
+    margin-bottom: 15px;
+}
+
+.photo-upload img {
+    width: 120px;
+    height: 120px;
+    border-radius: 10px;
+    object-fit: cover;
+    border: 2px solid #007bff;
+}
+
+.footer {
+    text-align: center;
+    font-size: 16px;
+    padding: 10px;
+    background: #333;
+    color: white;
+    width: 100%;
+    margin-top: 20px;
+}
+
+@media (max-width: 768px) {
+    .form-container {
+        width: 95%;
+    }
+}
