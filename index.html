@@ -5,6 +5,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Admission Form - University Institute of Engineering and Technology</title>
     <link rel="stylesheet" href="./style.css">
+    <script>
+        document.getElementById("studentForm").addEventListener("submit", async function (e) {
+    e.preventDefault();
+        });
+    </script>
 </head>
 <body>
     <h1>Admission Form</h1>
@@ -114,8 +119,7 @@
         </form>
     </div>
     <script>
-        document.getElementById("studentForm").addEventListener("submit", async function (e) {
-    e.preventDefault();
+        
         function submitForm() {
         const form = document.getElementById('studentForm');
         const formData = new FormData(form);
@@ -160,11 +164,10 @@
         .catch(error => console.error('Error:', error));
     });
 }
-});
 
     </script>
     <footer class="footer">
-        &copy; 2024 UIET Kathua
+        &copy; 2025 UIET Kathua
     </footer>
 </body>
 </html>
