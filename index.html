@@ -114,9 +114,17 @@
         </form>
     </div>
     <script>
-             document.getElementById("studentForm").addEventListener("submit", async function (e) {
-    e.preventDefault();
-                 
+        window.addEventListener('load', function() {
+      let forms = document.getElementsById('studentForm');
+      for (let form of forms) {
+        form.addEventListener('formdata', function(event) {
+          let formData = event.formData;
+          for (let [name, value] of Array.from(formData.entries())) {
+            if (value === '') formData.delete(name);
+          }
+        });
+      }
+    });  
         function submitForm() {
         const form = document.getElementById('studentForm');
         const formData = new FormData(form);
@@ -161,7 +169,7 @@
         .catch(error => console.error('Error:', error));
     });
 }
-});
+
     </script>
     <footer class="footer">
         &copy; 2025 UIET Kathua
