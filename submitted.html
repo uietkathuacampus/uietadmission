@@ -10,9 +10,8 @@
     <h1>Form Submitted Successfully</h1>
     <div id="submittedDataContainer"></div>
 
-    <button onclick="printPage()">Print</button>
-    <button onclick="editForm()">Edit Form</button>
-
+    <button onclick="printPage()">Print Form</button>
+    
     <script>
         function loadSubmittedData() {
             const submittedData = JSON.parse(localStorage.getItem("submittedData"));
