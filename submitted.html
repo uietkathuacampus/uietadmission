@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Submitted Details</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <h1>Form Submitted Successfully</h1>
+    <div id="submittedDataContainer"></div>
+
+    <button onclick="printPage()">Print</button>
+    <button onclick="editForm()">Edit Form</button>
+
+    <script>
+        function loadSubmittedData() {
+            const submittedData = JSON.parse(localStorage.getItem("submittedData"));
+
+            if (submittedData) {
+                let detailsHtml = "<ul>";
+                for (const key in submittedData) {
+                    detailsHtml += `<li><strong>${key}:</strong> ${submittedData[key]}</li>`;
+                }
+                detailsHtml += "</ul>";
+
+                document.getElementById("submittedDataContainer").innerHTML = detailsHtml;
+            } else {
+                document.getElementById("submittedDataContainer").innerHTML = "<p>No data found.</p>";
+            }
+        }
+
+        function printPage() {
+            window.print();
+        }
+
+        function editForm() {
+            window.location.href = "index.html";
+        }
+
+        window.onload = loadSubmittedData;
+    </script>
+</body>
+</html>
