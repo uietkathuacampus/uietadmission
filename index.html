@@ -18,13 +18,11 @@
         <form id="studentForm" enctype="multipart/form-data">
         <div class="form-group">
             <h3>Branch Preference</h3>
-            <label for="branch">Select a branch:</label>
             <select id="branch" name="Branch Preference1" required>
                 <option value="">Select Branch Preference1</option>
                 <option value="CSE">Computer Science And Engineering</option>
                 <option value="Civil">Civil Engineering</option>
             </select>
-            <label for="branch">:</label>
             <select id="branch" name="Branch Preference2" required>
                 <option value="">Select Branch Preference2</option>
                 <option value="Civil">Civil Engineering</option>
@@ -171,8 +169,9 @@
             </div>
         <div class="form-group">
             <label>Upload 10th, 12th, JEE Main/CUET Score Card, Category Certificate(if applicable), Payment Receipt: (in single pdf only, not more than 5Mb) </label>
-            <input type="file" name="Uploaded Documents" accept="image/*,application/pdf" required><br>
-        
+            <input type="file" name="Uploaded Documents" accept="image/*,application/pdf" required>
+
+            <br> 
             <label>Upload Student Photo:</label>
             <input type="file" name="StudentPhoto" accept="image/*" required>
         </div>
