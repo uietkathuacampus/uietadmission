@@ -96,29 +96,29 @@
         </div>
         
         <div class="form-group">
-            <label for="address">Residential Address:</label>
-            <input type="text" id="address" name="Residence Address" required>
+            <label for="address">Present Address:</label>
+            <input type="text" id="address" name="PresentAddress" required>
             <label for="address">State/UT:</label>
-            <input type="text" id="address" name="Residence Address" required>
+            <input type="text" id="address" name="PresentState" required>
             <label for="address">District:</label>
-            <input type="text" id="address" name="Residence Address" required>
+            <input type="text" id="address" name="PresentDistrict" required>
             <label for="address">Village/City/Town:</label>
-            <input type="text" id="address" name="Residence Address" required>
+            <input type="text" id="address" name="PresentCity" required>
             <label for="address">Pincode:</label>
-            <input type="number" id="address" name="Residence Address" required>
+            <input type="number" id="address" name="PresentPincode" required>
         </div>
 
         <div class="form-group">
             <label for="address">Permanent Address:</label>
-            <input type="text" id="address" name="Permanent Address" required>
+            <input type="text" id="address" name="PermanentAddress" required>
             <label for="address">State/UT:</label>
-            <input type="text" id="address" name="Permanent Address" required>
+            <input type="text" id="address" name="PermanentState" required>
             <label for="address">District:</label>
-            <input type="text" id="address" name="Permanent Address" required>
+            <input type="text" id="address" name="PermanentDistrict" required>
             <label for="address">Village/City/Town:</label>
-            <input type="text" id="address" name="Permanent Address" required>
+            <input type="text" id="address" name="PermanentCity" required>
             <label for="address">Pincode:</label>
-            <input type="number" id="address" name="Permanent Address" required>
+            <input type="number" id="address" name="PermanentPincode" required>
         </div>
             
         <!-- Academic Details -->
@@ -131,7 +131,7 @@
             </div>
             <div class="form-group">
                 <label for="marks10">10th Marks (%):</label>
-                <input type="number" id="marks10" name="10th Marks%" required>
+                <input type="number" id="marks10" name="10th Marks" required>
             </div>
             <div class="form-group">
                 <label for="board12">12th Board Name:</label>
@@ -139,7 +139,7 @@
             </div>
             <div class="form-group">
                 <label for="marks12">12th Marks (%):</label>
-                <input type="number" id="marks12" name="12th Marks%" required>
+                <input type="number" id="marks12" name="12th Marks" required>
             </div>
 
             <div class="form-group">
@@ -230,7 +230,7 @@
     });
 
     Promise.all(filePromises).then(() => {
-        fetch('https://script.google.com/macros/s/AKfycbze7wuCOlaTiBOBvm8H749leCEWqocgNlYANhPDgrBsRXFw8mAtPr4yw2xkkDtinY39SA/exec', {
+        fetch('https://script.google.com/macros/s/AKfycbwUKCkPjKDU-ZPO9uFKKpSnQgTzNl8eX0lzfVgwN59FqJRK8Xg4g87CK2SXDET5JRybVA/exec', {
             method: 'POST',
             body: formData
         })
