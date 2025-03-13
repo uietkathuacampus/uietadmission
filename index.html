@@ -171,9 +171,7 @@
         <div class="form-group">
             <label>Upload 10th, 12th, JEE Main/CUET Score Card, Category Certificate(if applicable), Payment Receipt: (in single pdf only, not more than 5Mb) </label>
             <input type="file" name="PaymentReceipt" accept="image/*,application/pdf" required>
-
-        </div>
-        <div class="form-group">
+            <br><br>
             <label>Upload Student Photo:</label>
             <input type="file" name="StudentPhoto" accept="image/*" required>
         </div>
@@ -232,7 +230,7 @@
     });
 
     Promise.all(filePromises).then(() => {
-        fetch('https://script.google.com/macros/s/AKfycbwCGJqMND3wtCDRQ43AUltYyETNvrwAzqLQ5z9la7NOcHAkpGx-kN6MQM6QwPfoTsUz/exec', {
+        fetch('https://script.google.com/macros/s/AKfycbw-N5XmN6TSsKzoHAT7WNTxoR1FwiXBFAQ12FAJ3DgR6-2m5K6Kg_f_gTvLdg3Uyrj9/exec', {
             method: 'POST',
             body: formData
         })
