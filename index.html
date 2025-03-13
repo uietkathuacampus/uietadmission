@@ -170,7 +170,7 @@
             </div>
         <div class="form-group">
             <label>Upload 10th, 12th, JEE Main/CUET Score Card, Category Certificate(if applicable), Payment Receipt: (in single pdf only, not more than 5Mb) </label>
-            <input type="file" name="UploadedDocuments" accept="image/*,application/pdf" required>
+            <input type="file" name="PaymentReceipt" accept="image/*,application/pdf" required>
 
         </div>
         <div class="form-group">
@@ -209,7 +209,7 @@
             window.location.href = "submitted.html";
 
         const filePromises = [];
-        const fileFields = ['UploadedDocuments', 'StudentPhoto'];
+        const fileFields = ['PaymentReceipt', 'StudentPhoto'];
 
         fileFields.forEach(field => {
             const fileInput = document.querySelector(`input[name="${field}"]`);
