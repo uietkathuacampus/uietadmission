@@ -220,7 +220,9 @@
             filePromises.push(filePromise);
         }
     });
-
+        formData.forEach((value, key) => {
+        formObject[key] = value;
+    });
     Promise.all(filePromises).then(() => {
         fetch('https://script.google.com/macros/s/AKfycbwUKCkPjKDU-ZPO9uFKKpSnQgTzNl8eX0lzfVgwN59FqJRK8Xg4g87CK2SXDET5JRybVA/exec', {
             method: 'POST',
@@ -237,10 +239,6 @@
         })
         .catch(error => console.error('Error:', error));
         
-    });
-
-    formData.forEach((value, key) => {
-        formObject[key] = value;
     });
 
     // Store form data in localStorage
