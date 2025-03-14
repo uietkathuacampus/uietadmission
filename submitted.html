@@ -14,7 +14,7 @@
     
     <script>
         function loadSubmittedData() {
-            const submittedData = JSON.parse(sessionStorage.getItem("submittedData"));
+            const submittedData = JSON.parse(localStorage.getItem("submittedData"));
 
             if (submittedData) {
                 let detailsHtml = "<ul>";
