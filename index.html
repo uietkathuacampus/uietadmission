@@ -232,7 +232,7 @@
                 formData.forEach((value, key) => {
                     formObject[key] = value;
                 });
-                sessionStorage.setItem("submittedData", JSON.stringify(formObject));
+                localStorage.setItem("submittedData", JSON.stringify(formObject));
 
                 // Redirect to submitted.html
                 window.location.href = "submitted.html";
