@@ -195,8 +195,6 @@
         function submitForm() {
         const form = document.getElementById('studentForm');
         const formData = new FormData(form);
-
-        const formObject = {};
         
         const filePromises = [];
         const fileFields = ['PaymentReceipt', 'StudentPhoto'];
@@ -220,9 +218,7 @@
             filePromises.push(filePromise);
         }
     });
-        formData.forEach((value, key) => {
-        formObject[key] = value;
-    });
+ 
     Promise.all(filePromises).then(() => {
         fetch('https://script.google.com/macros/s/AKfycbwUKCkPjKDU-ZPO9uFKKpSnQgTzNl8eX0lzfVgwN59FqJRK8Xg4g87CK2SXDET5JRybVA/exec', {
             method: 'POST',
@@ -231,21 +227,21 @@
         .then(response => response.json())
         .then(data => {
             if (data.result === 'success') {
-                alert('Form submitted successfully!');
-                form.reset();
+            // Store form data in session storage before redirecting
+                const formObject = {};
+                formData.forEach((value, key) => {
+                    formObject[key] = value;
+                });
+                sessionStorage.setItem("submittedData", JSON.stringify(formObject));
+
+                // Redirect to submitted.html
+                window.location.href = "submitted.html";
             } else {
                 alert('Error: ' + data.error);
             }
         })
         .catch(error => console.error('Error:', error));
-        
     });
-
-    // Store form data in localStorage
-    localStorage.setItem("submittedData", JSON.stringify(formObject));
-
-    // Redirect to submitted.html
-    window.location.href = "submitted.html";
     
 }
 
