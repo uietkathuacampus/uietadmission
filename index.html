@@ -195,16 +195,7 @@
         function submitForm() {
         const form = document.getElementById('studentForm');
         const formData = new FormData(form);
-        const formObject = {};
-            formData.forEach((value, key) => {
-                formObject[key] = value;
-            });
 
-            // Store in localStorage
-            localStorage.setItem("submittedData", JSON.stringify(formObject));
-
-            // Redirect to submitted.html
-            window.location.href = "submitted.html";
 
         const filePromises = [];
         const fileFields = ['PaymentReceipt', 'StudentPhoto'];
