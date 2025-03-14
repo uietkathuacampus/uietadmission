@@ -12,40 +12,31 @@
 
     <button onclick="printPage()">Print Form</button>
 
-    <script>
-        function loadSubmittedData() {
-            const submittedData = JSON.parse(localStorage.getItem("submittedData"));
+<script>
+        
+    function loadSubmittedData() {
+        const submittedData = JSON.parse(localStorage.getItem("submittedData"));
 
-            if (submittedData) {
-                let detailsHtml = "<h2>Submitted Details</h2><table border='1' style='width:100%; border-collapse: collapse;'>";
-
-                for (const key in submittedData) {
-                    if (key === "PaymentReceipt" || key === "StudentPhoto") {
-                        detailsHtml += `<tr>
-                            <td><strong>${key}:</strong></td>
-                            <td>Uploaded Successfully</td>
-                        </tr>`;
-                    } else {
-                        detailsHtml += `<tr>
-                            <td><strong>${key}:</strong></td>
-                            <td>${submittedData[key]}</td>
-                        </tr>`;
-                    }
+        if (submittedData) {
+            let detailsHtml = "<ul>";
+            for (const key in submittedData) {
+                if (key.includes("PaymentReceipt") || key.includes("StudentPhoto")) {
+                    // Instead of showing the file name or MIME type, show "Uploaded Successfully"
+                    detailsHtml += `<li><strong>${key}:</strong> Uploaded Successfully</li>`;
+                } else {
+                    detailsHtml += `<li><strong>${key}:</strong> ${submittedData[key]}</li>`;
                 }
-
-                detailsHtml += "</table>";
-
-                document.getElementById("submittedDataContainer").innerHTML = detailsHtml;
-            } else {
-                document.getElementById("submittedDataContainer").innerHTML = "<p>No data found.</p>";
             }
-        }
+            detailsHtml += "</ul>";
 
-        function printPage() {
-            window.print();
+            document.getElementById("submittedDataContainer").innerHTML = detailsHtml;
+        } else {
+            document.getElementById("submittedDataContainer").innerHTML = "<p>No data found.</p>";
         }
+    }
 
-        window.onload = loadSubmittedData;
-    </script>
+    window.onload = loadSubmittedData;
+</script>
+
 </body>
 </html>
