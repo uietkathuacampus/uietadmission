@@ -11,17 +11,29 @@
     <div id="submittedDataContainer"></div>
 
     <button onclick="printPage()">Print Form</button>
-    
+
     <script>
         function loadSubmittedData() {
             const submittedData = JSON.parse(localStorage.getItem("submittedData"));
 
             if (submittedData) {
-                let detailsHtml = "<ul>";
+                let detailsHtml = "<h2>Submitted Details</h2><table border='1' style='width:100%; border-collapse: collapse;'>";
+
                 for (const key in submittedData) {
-                    detailsHtml += `<li><strong>${key}:</strong> ${submittedData[key]}</li>`;
+                    if (key === "PaymentReceipt" || key === "StudentPhoto") {
+                        detailsHtml += `<tr>
+                            <td><strong>${key}:</strong></td>
+                            <td>Uploaded Successfully</td>
+                        </tr>`;
+                    } else {
+                        detailsHtml += `<tr>
+                            <td><strong>${key}:</strong></td>
+                            <td>${submittedData[key]}</td>
+                        </tr>`;
+                    }
                 }
-                detailsHtml += "</ul>";
+
+                detailsHtml += "</table>";
 
                 document.getElementById("submittedDataContainer").innerHTML = detailsHtml;
             } else {
@@ -32,7 +44,6 @@
         function printPage() {
             window.print();
         }
-
 
         window.onload = loadSubmittedData;
     </script>
