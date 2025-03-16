@@ -9,22 +9,23 @@
 <body>
     <h1>Form Submitted Successfully</h1>
     <div id="submittedDataContainer"></div>
-
     <button onclick="printPage()">Print Form</button>
     
     <script>
         function loadSubmittedData() {
             const submittedData = JSON.parse(localStorage.getItem("submittedData"));
-
             if (submittedData) {
                 let detailsHtml = "<ul>";
                 for (const key in submittedData) {
-                    if (key.includes("PaymentReceipt") || key.includes("StudentPhoto")) {
-                    // Instead of showing the file name or MIME type, show "Uploaded Successfully"
-                    detailsHtml += `<li><strong>${key}:</strong> Uploaded Successfully</li>
+                    if (key.includes("MimeType") || key.includes("Name")) {
+                        continue; // Skip displaying MIME type and file names
+                    }
+                    
+                    if (key === "PaymentReceipt" || key === "StudentPhoto") {
+                        detailsHtml += `<li><strong>${key}:</strong> Uploaded Successfully</li>`;
                     } else {
                         detailsHtml += `<li><strong>${key}:</strong> ${submittedData[key]}</li>`;
-                        }
+                    }
                 }
                 detailsHtml += "</ul>";
 
@@ -37,7 +38,6 @@
         function printPage() {
             window.print();
         }
-
 
         window.onload = loadSubmittedData;
     </script>
