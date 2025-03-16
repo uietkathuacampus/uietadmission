@@ -201,7 +201,10 @@
         function submitForm() {
         const form = document.getElementById('studentForm');
         const formData = new FormData(form);
-        
+
+        document.getElementById("submitButton").disabled = true;
+        document.getElementById("loadingMessage").style.display = "block";
+            
         const filePromises = [];
         const fileFields = ['PaymentReceipt', 'StudentPhoto'];
 
