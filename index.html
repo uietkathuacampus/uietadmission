@@ -198,7 +198,6 @@
         </form>
     </div>
     <script>
-        
     function submitForm() {
         const form = document.getElementById('studentForm');
         const formData = new FormData(form);
@@ -208,8 +207,8 @@
 
         // Show a loading indicator to the user
         const submitButton = document.querySelector('button[type="button"]');
-        submitButton.disabled = true;
         submitButton.innerText = "Submitting...";
+        submitButton.disabled = true;  // Disable button to prevent multiple clicks
 
         fileFields.forEach(field => {
             const fileInput = document.querySelector(`input[name="${field}"]`);
@@ -249,7 +248,7 @@
             // Redirect to submitted.html instantly
             window.location.href = "submitted.html";
 
-            // Continue submitting data to Google Apps Script
+            // Continue submitting data to Google Apps Script in the background
             fetch('https://script.google.com/macros/s/AKfycbwUKCkPjKDU-ZPO9uFKKpSnQgTzNl8eX0lzfVgwN59FqJRK8Xg4g87CK2SXDET5JRybVA/exec', {
                 method: 'POST',
                 body: formData
@@ -261,9 +260,15 @@
                 }
             })
             .catch(error => console.error('Error:', error));
+        }).catch(error => {
+            console.error("File processing error:", error);
+            alert("Error processing files. Please try again.");
+            submitButton.innerText = "Submit";
+            submitButton.disabled = false;  // Re-enable button if error occurs
         });
     }
 </script>
+
 
 </body>
 </html>
