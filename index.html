@@ -234,13 +234,8 @@
         .then(data => {
             if (data.result === 'success') {
             // Store form data in session storage before redirecting
-                formObject["PaymentReceipt"] = "Uploaded Successfully";
-                formObject["StudentPhoto"] = "Uploaded Successfully";
                 const formObject = {};
                 formData.forEach((value, key) => {
-                if (!key.includes("MimeType") && !key.includes("Name")) {  // Exclude MIME type and file names
-                    formObject[key] = value;
-                }
                     formObject[key] = value;
                 });
                 localStorage.setItem("submittedData", JSON.stringify(formObject));
