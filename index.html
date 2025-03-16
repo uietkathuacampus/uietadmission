@@ -193,14 +193,7 @@
         </form>
     </div>
     <script>
-        // Include Compressor.js for image compression
-        const loadCompressor = () => {
-        const script = document.createElement("script");
-        script.src = "https://cdnjs.cloudflare.com/ajax/libs/compressorjs/1.2.1/compressor.min.js";
-        script.onload = () => console.log("Compressor.js loaded");
-        document.head.appendChild(script);
-    };
-        loadCompressor();
+
         function submitForm() {
         const form = document.getElementById('studentForm');
         const formData = new FormData(form);
