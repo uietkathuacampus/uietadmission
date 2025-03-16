@@ -194,81 +194,72 @@
     </div>
     <script>
         // Include Compressor.js for image compression
-    const loadCompressor = () => {
-    const script = document.createElement("script");
-    script.src = "https://cdnjs.cloudflare.com/ajax/libs/compressorjs/1.2.1/compressor.min.js";
-    script.onload = () => console.log("Compressor.js loaded");
-    document.head.appendChild(script);
-};
-loadCompressor();
+        const loadCompressor = () => {
+        const script = document.createElement("script");
+        script.src = "https://cdnjs.cloudflare.com/ajax/libs/compressorjs/1.2.1/compressor.min.js";
+        script.onload = () => console.log("Compressor.js loaded");
+        document.head.appendChild(script);
+    };
+        loadCompressor();
+        function submitForm() {
+        const form = document.getElementById('studentForm');
+        const formData = new FormData(form);
+        
+        const filePromises = [];
+        const fileFields = ['PaymentReceipt', 'StudentPhoto'];
 
-function submitForm() {
-    const form = document.getElementById('studentForm');
-    const formData = new FormData(form);
-    
-    const submitButton = document.querySelector('button[type="button"]');
-    submitButton.innerText = "Submitting...";
-    submitButton.disabled = true;  // Disable button to prevent multiple clicks
-    
-    const maxFileSize = 5 * 1024 * 1024; // 5MB limit
-    const fileInputs = [
-        { name: "PaymentReceipt", type: "file" },
-        { name: "StudentPhoto", type: "image" }
-    ];
+        // Show a loading indicator to the user
+        const submitButton = document.querySelector('button[type="button"]');
+        submitButton.innerText = "Submitting...";
+        submitButton.disabled = true;  // Disable button to prevent multiple clicks
 
-    const filePromises = fileInputs.map(input => {
-        const fileInput = document.querySelector(`input[name="${input.name}"]`);
-        if (fileInput.files.length === 0) return Promise.resolve();
+        fileFields.forEach(field => {
+            const fileInput = document.querySelector(`input[name="${field}"]`);
+            if (fileInput.files.length > 0) {
+                const file = fileInput.files[0];
+                const reader = new FileReader();
 
-        const file = fileInput.files[0];
-
-        if (file.size > maxFileSize) {
-            alert(`${input.name} should be less than 5MB`);
-            return Promise.reject();
-        }
-
-        if (input.type === "image") {
-            return new Promise(resolve => {
-                new Compressor(file, {
-                    quality: 0.6, // 60% quality
-                    success(result) {
-                        formData.append(input.name, result);
+                const filePromise = new Promise(resolve => {
+                    reader.onloadend = function () {
+                        formData.append(field, reader.result.split(',')[1]);  // Base64 data
+                        formData.append(`${field}MimeType`, file.type); // File type
+                        formData.append(`${field}Name`, file.name); // File name
                         resolve();
-                    },
-                    error(err) {
-                        console.error("Compression error:", err);
-                        formData.append(input.name, file);
-                        resolve();
-                    }
+                    };
+                    reader.readAsDataURL(file);
                 });
-            });
-        } else {
-            formData.append(input.name, file);
-            return Promise.resolve();
-        }
-    });
 
-    Promise.all(filePromises)
-        .then(() => {
-            fetch('https://script.google.com/macros/s/AKfycbw2wxIwqICD5v5ds_Pn_YeazROZu1BrKTeM4-DxZmqoC55wpt7MnMQkE_Nq4IFq-9u_0g/exec', {
-                method: 'POST',
-                body: formData
-            })
-            .then(response => response.json())
-            .then(data => {
-                if (data.result === 'success') {
-                    localStorage.setItem("submittedData", JSON.stringify(Object.fromEntries(formData)));
-                    window.location.href = "submitted.html";
-                } else {
-                    alert('Error: ' + data.error);
-                }
-            })
-            .catch(error => console.error('Error:', error));
+                filePromises.push(filePromise);
+            }
+        });
+
+        Promise.all(filePromises).then(() => {
+        fetch('https://script.google.com/macros/s/AKfycbw2wxIwqICD5v5ds_Pn_YeazROZu1BrKTeM4-DxZmqoC55wpt7MnMQkE_Nq4IFq-9u_0g/exec', {
+            method: 'POST',
+            body: formData
         })
-        .catch(() => console.log("File validation failed"));
+        .then(response => response.json())
+        .then(data => {
+            if (data.result === 'success') {
+            // Store form data in session storage before redirecting
+                const formObject = {};
+                formData.forEach((value, key) => {
+                    formObject[key] = value;
+                });
+                localStorage.setItem("submittedData", JSON.stringify(formObject));
+
+                // Redirect to submitted.html
+                window.location.href = "submitted.html";
+            } else {
+                alert('Error: ' + data.error);
+            }
+        })
+        .catch(error => console.error('Error:', error));
+    });
+    
 }
 
-        
+
 </script>
 
 
