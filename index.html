@@ -198,64 +198,72 @@
         </form>
     </div>
     <script>
-        function submitForm() {
+        
+    function submitForm() {
         const form = document.getElementById('studentForm');
         const formData = new FormData(form);
-
-        document.getElementById("submitButton").disabled = true;
-        document.getElementById("loadingMessage").style.display = "block";
-            
+        
         const filePromises = [];
         const fileFields = ['PaymentReceipt', 'StudentPhoto'];
+
+        // Show a loading indicator to the user
+        const submitButton = document.querySelector('button[type="button"]');
+        submitButton.disabled = true;
+        submitButton.innerText = "Submitting...";
 
         fileFields.forEach(field => {
             const fileInput = document.querySelector(`input[name="${field}"]`);
             if (fileInput.files.length > 0) {
                 const file = fileInput.files[0];
                 const reader = new FileReader();
-            
+
                 const filePromise = new Promise(resolve => {
                     reader.onloadend = function () {
                         formData.append(field, reader.result.split(',')[1]);  // Base64 data
                         formData.append(`${field}MimeType`, file.type); // File type
                         formData.append(`${field}Name`, file.name); // File name
                         resolve();
-                        };
-                        reader.readAsDataURL(file);
+                    };
+                    reader.readAsDataURL(file);
+                });
+
+                filePromises.push(filePromise);
+            }
+        });
+
+        Promise.all(filePromises).then(() => {
+            // Store form data in local storage instantly for immediate display on submitted.html
+            const formObject = {};
+            formData.forEach((value, key) => {
+                if (!key.includes("MimeType") && !key.includes("Name")) {  // Exclude MIME type and file names
+                    formObject[key] = value;
+                }
             });
 
-            filePromises.push(filePromise);
-        }
-    });
- 
-    Promise.all(filePromises).then(() => {
-        fetch('https://script.google.com/macros/s/AKfycbwUKCkPjKDU-ZPO9uFKKpSnQgTzNl8eX0lzfVgwN59FqJRK8Xg4g87CK2SXDET5JRybVA/exec', {
-            method: 'POST',
-            body: formData
-        })
-        .then(response => response.json())
-        .then(data => {
-            if (data.result === 'success') {
-            // Store form data in session storage before redirecting
-                const formObject = {};
-                formData.forEach((value, key) => {
-                    formObject[key] = value;
-                });
-                localStorage.setItem("submittedData", JSON.stringify(formObject));
-                setTimeout(() => {
-                window.location.href = "submitted.html";
-            }, 1500);  // 1.5-second delay to improve UX
+            // Indicate files are uploaded successfully
+            formObject["PaymentReceipt"] = "Uploaded Successfully";
+            formObject["StudentPhoto"] = "Uploaded Successfully";
 
-            } else {
-                alert('Error: ' + data.error);
-            }
-        })
-        .catch(error => console.error('Error:', error));
-    });
-    
-}
+            localStorage.setItem("submittedData", JSON.stringify(formObject));
 
+            // Redirect to submitted.html instantly
+            window.location.href = "submitted.html";
 
-    </script>
+            // Continue submitting data to Google Apps Script
+            fetch('https://script.google.com/macros/s/AKfycbwUKCkPjKDU-ZPO9uFKKpSnQgTzNl8eX0lzfVgwN59FqJRK8Xg4g87CK2SXDET5JRybVA/exec', {
+                method: 'POST',
+                body: formData
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.result !== 'success') {
+                    alert('Error: ' + data.error);
+                }
+            })
+            .catch(error => console.error('Error:', error));
+        });
+    }
+</script>
+
 </body>
 </html>
