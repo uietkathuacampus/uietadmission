@@ -11,34 +11,30 @@
     <div id="submittedDataContainer"></div>
 
     <button onclick="printPage()">Print Form</button>
+    
+    <script>
+        function loadSubmittedData() {
+            const submittedData = JSON.parse(localStorage.getItem("submittedData"));
 
-<script>
-        
-    function loadSubmittedData() {
-        const submittedData = JSON.parse(localStorage.getItem("submittedData"));
-
-        if (submittedData) {
-            let detailsHtml = "<ul>";
-            for (const key in submittedData) {
-                if (key.includes("PaymentReceipt") || key.includes("StudentPhoto")) {
-                    // Instead of showing the file name or MIME type, show "Uploaded Successfully"
-                    detailsHtml += `<li><strong>${key}:</strong> Uploaded Successfully</li>`;
-                } else {
+            if (submittedData) {
+                let detailsHtml = "<ul>";
+                for (const key in submittedData) {
                     detailsHtml += `<li><strong>${key}:</strong> ${submittedData[key]}</li>`;
                 }
-            }
-            detailsHtml += "</ul>";
+                detailsHtml += "</ul>";
 
-            document.getElementById("submittedDataContainer").innerHTML = detailsHtml;
-        } else {
-            document.getElementById("submittedDataContainer").innerHTML = "<p>No data found.</p>";
+                document.getElementById("submittedDataContainer").innerHTML = detailsHtml;
+            } else {
+                document.getElementById("submittedDataContainer").innerHTML = "<p>No data found.</p>";
+            }
         }
+
         function printPage() {
             window.print();
-    }
+        }
 
-    window.onload = loadSubmittedData;
-</script>
 
+        window.onload = loadSubmittedData;
+    </script>
 </body>
 </html>
