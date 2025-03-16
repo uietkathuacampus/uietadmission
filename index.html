@@ -186,11 +186,6 @@
                 <input type="date" id="date" name="Date" required>
         </div>
 
-        <div id="loadingMessage" style="display: none; text-align: center;">
-            <p>Submitting your form, please wait...</p>
-            <div class="spinner"></div>
-        </div>
-
     
         <div class="submit-button">
             <button type="button" onclick="submitForm()">Submit</button>
@@ -231,42 +226,36 @@
         });
 
         Promise.all(filePromises).then(() => {
-            // Store form data in local storage instantly for immediate display on submitted.html
-            const formObject = {};
-            formData.forEach((value, key) => {
+        fetch('https://script.google.com/macros/s/AKfycbwUKCkPjKDU-ZPO9uFKKpSnQgTzNl8eX0lzfVgwN59FqJRK8Xg4g87CK2SXDET5JRybVA/exec', {
+            method: 'POST',
+            body: formData
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.result === 'success') {
+            // Store form data in session storage before redirecting
+                formObject["PaymentReceipt"] = "Uploaded Successfully";
+                formObject["StudentPhoto"] = "Uploaded Successfully";
+                const formObject = {};
+                formData.forEach((value, key) => {
                 if (!key.includes("MimeType") && !key.includes("Name")) {  // Exclude MIME type and file names
                     formObject[key] = value;
                 }
-            });
+                    formObject[key] = value;
+                });
+                localStorage.setItem("submittedData", JSON.stringify(formObject));
 
-            // Indicate files are uploaded successfully
-            formObject["PaymentReceipt"] = "Uploaded Successfully";
-            formObject["StudentPhoto"] = "Uploaded Successfully";
-
-            localStorage.setItem("submittedData", JSON.stringify(formObject));
-
-            // Redirect to submitted.html instantly
-            window.location.href = "submitted.html";
-
-            // Continue submitting data to Google Apps Script in the background
-            fetch('https://script.google.com/macros/s/AKfycbwUKCkPjKDU-ZPO9uFKKpSnQgTzNl8eX0lzfVgwN59FqJRK8Xg4g87CK2SXDET5JRybVA/exec', {
-                method: 'POST',
-                body: formData
-            })
-            .then(response => response.json())
-            .then(data => {
-                if (data.result !== 'success') {
-                    alert('Error: ' + data.error);
-                }
-            })
-            .catch(error => console.error('Error:', error));
-        }).catch(error => {
-            console.error("File processing error:", error);
-            alert("Error processing files. Please try again.");
-            submitButton.innerText = "Submit";
-            submitButton.disabled = false;  // Re-enable button if error occurs
-        });
-    }
+                // Redirect to submitted.html
+                window.location.href = "submitted.html";
+            } else {
+                alert('Error: ' + data.error);
+            }
+        })
+        .catch(error => console.error('Error:', error));
+    });
+    
+}
+    
 </script>
 
 
