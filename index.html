@@ -185,7 +185,13 @@
                 <label for="date">Date:</label>
                 <input type="date" id="date" name="Date" required>
         </div>
-            
+
+        <div id="loadingMessage" style="display: none; text-align: center;">
+            <p>Submitting your form, please wait...</p>
+            <div class="spinner"></div>
+        </div>
+
+    
         <div class="submit-button">
             <button type="button" onclick="submitForm()">Submit</button>
         </div>
