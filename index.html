@@ -239,9 +239,10 @@
                     formObject[key] = value;
                 });
                 localStorage.setItem("submittedData", JSON.stringify(formObject));
-
-                // Redirect to submitted.html
+                setTimeout(() => {
                 window.location.href = "submitted.html";
+            }, 1500);  // 1.5-second delay to improve UX
+
             } else {
                 alert('Error: ' + data.error);
             }
