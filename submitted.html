@@ -19,7 +19,12 @@
             if (submittedData) {
                 let detailsHtml = "<ul>";
                 for (const key in submittedData) {
-                    detailsHtml += `<li><strong>${key}:</strong> ${submittedData[key]}</li>`;
+                    if (key.includes("PaymentReceipt") || key.includes("StudentPhoto")) {
+                    // Instead of showing the file name or MIME type, show "Uploaded Successfully"
+                    detailsHtml += `<li><strong>${key}:</strong> Uploaded Successfully</li>
+                    } else {
+                        detailsHtml += `<li><strong>${key}:</strong> ${submittedData[key]}</li>`;
+                        }
                 }
                 detailsHtml += "</ul>";
 
