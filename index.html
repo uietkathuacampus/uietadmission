@@ -204,6 +204,7 @@
         // Show a loading indicator to the user
         const submitButton = document.querySelector('button[type="button"]');
         submitButton.innerText = "Submitting...";
+        submitButton.disabled = true;  // Disable button to prevent multiple clicks
 
         fileFields.forEach(field => {
             const fileInput = document.querySelector(`input[name="${field}"]`);
@@ -242,18 +243,11 @@
 
                 // Redirect to submitted.html
                 window.location.href = "submitted.html";
-                form.reset();
-              
             } else {
                 alert('Error: ' + data.error);
-               
             }
         })
-        .catch(error => {
-            console.error('Error:', error));
-            
-        });
-            
+        .catch(error => console.error('Error:', error));
     });
     
 }
