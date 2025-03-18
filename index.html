@@ -244,11 +244,20 @@
                 // Redirect to submitted.html
                 window.location.href = "submitted.html";
                 form.reset();
+                submitButton.disabled = false;
+                submitButton.textContent = "Submit";
             } else {
                 alert('Error: ' + data.error);
+                submitButton.disabled = false;
+                submitButton.textContent = "Submit";
             }
         })
-        .catch(error => console.error('Error:', error));
+        .catch(error => {
+            console.error('Error:', error));
+            submitButton.disabled = false;
+            submitButton.textContent = "Submit"; 
+        });
+            
     });
     
 }
