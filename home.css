@@ -1,0 +1,72 @@
+/* General Styles */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f4f4;
+    color: #333;
+}
+
+/* Container */
+.container {
+    width: 80%;
+    max-width: 900px;
+    margin: 30px auto;
+    padding: 20px;
+    background-color: white;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+    border-radius: 8px;
+}
+
+/* Headings */
+h1, h2, h3, h4 {
+    text-align: center;
+    color: #0056b3;
+}
+
+/* Paragraphs */
+p {
+    font-size: 16px;
+    line-height: 1.6;
+    text-align: justify;
+}
+
+/* Lists */
+ul, ol {
+    margin-left: 20px;
+}
+
+/* Apply Button */
+.apply-button {
+    display: block;
+    width: 200px;
+    text-align: center;
+    background-color: #0056b3;
+    color: white;
+    text-decoration: none;
+    padding: 10px;
+    margin: 20px auto;
+    border-radius: 5px;
+    font-size: 18px;
+}
+
+.apply-button:hover {
+    background-color: #003f7f;
+}
+
+/* Checkbox & Agreement */
+input[type="checkbox"] {
+    margin: 10px 5px 0 0;
+}
+
+p:last-of-type {
+    display: inline-block;
+    font-size: 14px;
+}
+
+/* Responsive Design */
+@media screen and (max-width: 768px) {
+    .container {
+        width: 95%;
+    }
+}
