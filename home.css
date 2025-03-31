@@ -19,11 +19,8 @@ body {
 }
 
 .nav img {
-    display: flex; /* Use flexbox for layout */
-    align-items: left; /* Center items vertically */
-    justify-content: space-between; /* Space between logo and form */
-    padding: 20px; /* Add padding around the nav */
-    flex: 0 0 auto;
+    float: left;
+    width: 20%;
     
 }
 
