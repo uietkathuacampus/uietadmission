@@ -156,16 +156,46 @@
         const submitButton = document.getElementById('submitBtn');
         const formData = new FormData(form);
 
+        const filePromises = [];
+        const fileFields = ['PaymentReceipt', 'StudentPhoto'];
+
         submitButton.innerText = "Submitting...";
         submitButton.disabled = true;
 
-        fetch('https://script.google.com/macros/s/AKfycbzTRsrxfNDV4oliInvUB-amHcK_fUD2HYgDQ4AgN67VCc08w3JS8MvOCkkpKKSyEhHo7g/exec', {
-            method: 'POST',
-            body: formData
-        })
+        fileFields.forEach(field => {
+            const fileInput = document.querySelector(input[name="${field}"]);
+            if (fileInput && fileInput.files.length > 0) {
+                const file = fileInput.files[0];
+                const reader = new FileReader();
+
+                const filePromise = new Promise(resolve => {
+                    reader.onloadend = function () {
+                        formData.append(field, reader.result.split(',')[1]); // Base64 data
+                        formData.append(${field}MimeType, file.type); // File type
+                        formData.append(${field}Name, file.name); // File name
+                        resolve();
+                    };
+                    reader.readAsDataURL(file);
+                });
+
+                filePromises.push(filePromise);
+            }
+        });
+
+        Promise.all(filePromises).then(() => {
+            fetch('https://script.google.com/macros/s/AKfycbzTRsrxfNDV4oliInvUB-amHcK_fUD2HYgDQ4AgN67VCc08w3JS8MvOCkkpKKSyEhHo7g/exec', {
+                method: 'POST',
+                body: formData
+            })
+ 
         .then(response => response.json())
         .then(data => {
             if (data.result === 'success') {
+                const formObject = {};
+                formData.forEach((value, key) => {
+                    formObject[key] = value;
+                });
+                localStorage.setItem("submittedData", JSON.stringify(formObject));
                 form.reset();
                 submitButton.disabled = false;
                 submitButton.innerText = "Submit";
