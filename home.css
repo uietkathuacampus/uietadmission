@@ -18,6 +18,12 @@ body {
     border-radius: 8px;
 }
 
+.container img {
+    display: block;
+    margin: 0 auto;
+    max-width: 150px;
+}
+
 /* Headings */
 h1, h2, h4 {
     text-align: center;
