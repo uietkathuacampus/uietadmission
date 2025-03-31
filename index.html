@@ -8,6 +8,7 @@
 </head>
 <body>
     <div class="container">
+        <img src="logo4.png" alt="University of Jammu Logo" width="150">
         <h1>UNIVERSITY INSTITUTE OF ENGINEERING & TECHNOLOGY (UIET)</h1>
         <h2>University of Jammu, Jangalote, Kathua (J&K)</h2>
         <h4>(A Constituent College of the University of Jammu, approved by AICTE)</h4>
@@ -83,10 +84,34 @@
             <li><strong>Name of A/c Holder:</strong> Co-ordinator UIET, University of Jammu</li>
         </ul>
         <br>
-        <input type="checkbox"><p>I have read and agreed to the mentioned details above.</p>
+        <input type="checkbox" id="agreeCheckbox">
+        <label for="agreeCheckbox"><p>I have read and agreed to the mentioned details above.</p></label>
     </div>
 
-        <a href="form.html" class="apply-button">Fill Application Form</a>
+        <a href="form.html" id="applyButton" class="apply-button">Fill Application Form</a>
+    <script>
+    document.addEventListener("DOMContentLoaded", function () {
+        const checkbox = document.getElementById("agreeCheckbox");
+        const applyButton = document.getElementById("applyButton");
+
+        // Initially disable the button
+        applyButton.disabled = true;
+
+        // Check if the checkbox is checked
+        checkbox.addEventListener("change", function () {
+            applyButton.disabled = !checkbox.checked;
+        });
+
+        // Show alert if the button is clicked while disabled
+        applyButton.addEventListener("click", function (event) {
+            if (!checkbox.checked) {
+                event.preventDefault();
+                alert("Kindly agree to the terms before proceeding.");
+            }
+        });
+    });
+    </script>
+
 
 </body>
 </html>
