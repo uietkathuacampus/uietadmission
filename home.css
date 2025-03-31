@@ -17,9 +17,11 @@ body {
     box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
     border-radius: 8px;
 }
+/* Navigation */
 .nav {
     display: flex;
     align-items: center; /* Vertically center the items */
+    justify-content: flex-start; /* Align items to the start */
     margin-bottom: 20px; /* Space below the nav */
 }
 
