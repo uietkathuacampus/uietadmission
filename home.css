@@ -18,6 +18,13 @@ body {
     box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
     border-radius: 8px;
 }
+.nav {
+    width: 100px;
+}
+.heading {
+    margin: auto;
+    padding: 4px;
+}
 
 /* Headings */
 h1, h2, h4 {
