@@ -17,11 +17,29 @@ body {
     box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
     border-radius: 8px;
 }
+.nav {
+    display: flex;
+    align-items: center; /* Vertically center the items */
+    margin-bottom: 20px; /* Space below the nav */
+}
 
-.nav img {
-    float: left;
-    width: 20%;
-    
+.nav .logo {
+    width: 150px; /* Set the width of the logo */
+    margin-right: 20px; /* Space between logo and heading */
+}
+
+.heading {
+    flex-grow: 1; /* Allow heading to take up remaining space */
+}
+
+.heading h1 {
+    margin: 0; /* Remove default margin */
+    text-align: left; /* Align text to the left */
+}
+
+.heading h2, .heading h4 {
+    margin: 0; /* Remove default margin */
+    text-align: left; /* Align text to the left */
 }
 
 /* Headings */
