@@ -19,9 +19,11 @@ body {
 }
 
 .nav img {
-    display: block;
-    margin: 0 auto;
-    max-width: 150px;
+    display: flex; /* Use flexbox for layout */
+    align-items: center; /* Center items vertically */
+    justify-content: space-between; /* Space between logo and form */
+    padding: 20px; /* Add padding around the nav */
+    flex: 0 0 auto;
 }
 
 /* Headings */
