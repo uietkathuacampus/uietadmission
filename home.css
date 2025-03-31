@@ -1,3 +1,4 @@
+
 /* General Styles */
 body {
     font-family: Arial, sans-serif;
@@ -5,33 +6,6 @@ body {
     padding: 0;
     background-color: #f4f4f4;
     color: #333;
-}
-
-/* Navigation */
-.nav {
-    display: flex;
-    align-items: center; /* Vertically center the items */
-    justify-content: flex-start; /* Align items to the start */
-    margin-bottom: 20px; /* Space below the nav */
-}
-
-.nav .logo {
-    width: 150px; /* Set the width of the logo */
-    margin-right: 20px; /* Space between logo and heading */
-}
-
-.heading {
-    flex-grow: 1; /* Allow heading to take up remaining space */
-}
-
-.heading h1 {
-    margin: 0; /* Remove default margin */
-    text-align: left; /* Align text to the left */
-}
-
-.heading h2, .heading h4 {
-    margin: 0; /* Remove default margin */
-    text-align: left; /* Align text to the left */
 }
 
 /* Container */
@@ -54,7 +28,6 @@ h3 {
     text-align: center;
     color: #0056b3;
 }
-
 /* Paragraphs */
 p {
     font-size: 16px;
