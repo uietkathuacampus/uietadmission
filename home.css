@@ -12,6 +12,7 @@ body {
 .container {
     width: 80%;
     max-width: 900px;
+    margin-left: 5px;
     margin: 30px auto;
     padding: 20px;
     background-color: white;
@@ -19,13 +20,30 @@ body {
     border-radius: 8px;
 }
 .nav {
-    width: 100px;
-}
-.heading {
-    margin: auto;
-    padding: 4px;
+    display: flex;
+    align-items: center; /* Vertically center the items */
+    justify-content: flex-start; /* Align items to the start */
+    margin-bottom: 16px; /* Space below the nav */
 }
 
+.nav .logo {
+    width: 100px; /* Set the width of the logo */
+    margin-right: 6px; /* Space between logo and heading */
+}
+
+.heading {
+    flex-grow: 1; /* Allow heading to take up remaining space */
+}
+
+.heading h1 {
+    margin: 0; /* Remove default margin */
+    text-align: left; /* Align text to the left */
+}
+
+.heading h2, .heading h4 {
+    margin: 0; /* Remove default margin */
+    text-align: left; /* Align text to the left */
+}
 /* Headings */
 h1, h2, h4 {
     text-align: center;
