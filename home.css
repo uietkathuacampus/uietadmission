@@ -7,15 +7,15 @@ body {
     color: #333;
 }
 
-/* Navigation */
-.nav {
+/* Navigahtion */
+.heading .logo {
     display: flex;
     align-items: center; /* Vertically center the items */
     justify-content: flex-start; /* Align items to the start */
     margin-bottom: 2px; /* Space below the nav */
 }
 
-.nav .logo {
+.heading .logo {
     width: 110px; /* Set the width of the logo */
     margin-right: 4px; /* Space between logo and heading */
 }
